@@ -1,35 +1,39 @@
 import React from "react";
+import Box, { BoxProps } from "@/components/layout/Box";
+import Clip from "./clip";
+import Stack from "@/components/layout/Stack";
 import mergeSx from "@/utils/mergeSx";
-import Box from "@/components/layout/Box";
 
 export type BoardProps = {
-  /** The title of the board */
-};
+  pins?: "side" | "square";
+} & BoxProps;
 
-const sxProps = {
-  height: "262px",
-  width: "230px",
-  boxShadow: "0px 4px 4px 0px #00000040",
+const DEFAULT_SX = {
+  background: "#FFFFFF",
+  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   display: "flex",
   justifyContent: "space-between",
+  flexDirection: "column",
 };
 
-const clipSx = {
-  width: "24px",
-  height: "24px",
-  position: "relative",
-  top: "10px",
-  borderRadius: "24px",
-  background: "#F9CD8B",
-  boxShadow: "0px 4px 4px 0px #00000040",
-};
-
-function Board() {
+function Board({ sx, pins, children }: BoardProps) {
+  const sxMerged = mergeSx(DEFAULT_SX, sx);
   return (
     <>
-      <Box sx={sxProps}>
-        <Box sx={mergeSx(clipSx, { left: "10px" })} />
-        <Box sx={mergeSx(clipSx, { right: "10px" })} />
+      <Box sx={sxMerged}>
+        {(pins === "side" || pins === "square") && (
+          <Stack direction="row" justifyContent="space-between">
+            <Clip sx={{ top: "10px", left: "10px" }} />
+            <Clip sx={{ top: "10px", right: "10px" }} />
+          </Stack>
+        )}
+        <Box>{children}</Box>
+        {pins === "square" && (
+          <Stack direction="row" justifyContent="space-between">
+            <Clip sx={{ bottom: "10px", left: "10px" }} />
+            <Clip sx={{ bottom: "10px", right: "10px" }} />
+          </Stack>
+        )}
       </Box>
     </>
   );
