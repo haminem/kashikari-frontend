@@ -1,20 +1,20 @@
 import React from "react";
-import Stack, { StackProps as MuiStackProps } from "@mui/material/Stack";
+import { BoxProps as MuiBoxProps } from "@mui/material/Box";
+import Box from "./Box";
+import mergeSx from "@/utils/mergeSx";
 
-export type StackRestProps = MuiStackProps;
+export type StackRestProps = MuiBoxProps;
 
-function StackRest({ children }: StackRestProps) {
-  return (
-    <Stack
-      sx={{
-        flexGrow: 1,
-        flexBasis: 0,
-        overflowY: "clip",
-      }}
-    >
-      {children}
-    </Stack>
-  );
+const DEFAULT_SX = {
+  flexGrow: 1,
+  flexBasis: 0,
+  overflowY: "clip",
+};
+
+function StackRest({ sx, children }: StackRestProps) {
+  const sxMerged = mergeSx(DEFAULT_SX, sx);
+
+  return <Box sx={sxMerged}>{children}</Box>;
 }
 
 export default StackRest;

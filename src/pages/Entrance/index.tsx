@@ -1,5 +1,10 @@
 import React from "react";
-import Box from "@/components/layout/Box";
+import Header from "@/templates/Header";
+import Footer from "@/templates/Footer";
+import Stack from "@/components/layout/Stack";
+import StackRest from "@/components/layout/StackRest";
+import StackCenter from "@/components/layout/StackCenter";
+import Board from "@/components/dataDisplay/board";
 
 type EntranceProps = {
   setUserName: (value: string) => void;
@@ -7,24 +12,40 @@ type EntranceProps = {
   login: () => void;
 };
 
-const newSx = {
-  width: "597px",
-  height: "705px",
-  background: "#FFFFFF",
-  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-};
-
 const Entrance = ({ setUserName, register_user, login }: EntranceProps) => {
   return (
-    <Box sx={{ background: "#F9F7F5", width: "100%", height: "100%" }}>
-      name
-      <input type="text" onChange={(e) => setUserName(e.target.value)} />
-      <button onClick={register_user}>新規作成</button>
-      <br />
-      name
-      <input type="text" onChange={(e) => setUserName(e.target.value)} />
-      <button onClick={login}>ログイン</button>
-    </Box>
+    <Stack height="100%">
+      <Header />
+      <StackRest>
+        <StackCenter>
+          <Board
+            pins="square"
+            sx={{ margin: "0 20px", height: "550px", width: "450px" }}
+          >
+            ユーザーID
+            <input type="text" onChange={(e) => setUserName(e.target.value)} />
+            <button onClick={login}>ログイン</button>
+            <br />
+            パスワード
+            <input type="text" />
+            <button onClick={login}>ログイン</button>
+          </Board>
+          <Board
+            pins="square"
+            sx={{ margin: "0 20px", height: "550px", width: "450px" }}
+          >
+            ユーザーID
+            <input type="text" onChange={(e) => setUserName(e.target.value)} />
+            <button onClick={register_user}>新規作成</button>
+            <br />
+            パスワード
+            <input type="text" />
+            <button onClick={login}>ログイン</button>
+          </Board>
+        </StackCenter>
+      </StackRest>
+      <Footer />
+    </Stack>
   );
 };
 
