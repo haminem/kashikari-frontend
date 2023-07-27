@@ -21,26 +21,30 @@ const Entrance = ({ setUserName, register_user, login }: EntranceProps) => {
           <Board
             pins="square"
             sx={{ margin: "0 20px", height: "550px", width: "450px" }}
+            title="ログイン"
           >
             ユーザーID
+            <br />
             <input type="text" onChange={(e) => setUserName(e.target.value)} />
             <button onClick={login}>ログイン</button>
             <br />
             パスワード
+            <br />
             <input type="text" />
-            <button onClick={login}>ログイン</button>
           </Board>
           <Board
             pins="square"
             sx={{ margin: "0 20px", height: "550px", width: "450px" }}
+            title="新規作成"
           >
             ユーザーID
+            <br />
             <input type="text" onChange={(e) => setUserName(e.target.value)} />
             <button onClick={register_user}>新規作成</button>
             <br />
             パスワード
+            <br />
             <input type="text" />
-            <button onClick={login}>ログイン</button>
           </Board>
         </StackCenter>
       </StackRest>

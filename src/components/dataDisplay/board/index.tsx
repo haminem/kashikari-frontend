@@ -1,11 +1,13 @@
 import React from "react";
 import Box, { BoxProps } from "@/components/layout/Box";
 import Clip from "./clip";
+import Title from "./title";
 import Stack from "@/components/layout/Stack";
 import mergeSx from "@/utils/mergeSx";
 
 export type BoardProps = {
   pins?: "side" | "square";
+  title?: string;
 } & BoxProps;
 
 const DEFAULT_SX = {
@@ -16,7 +18,7 @@ const DEFAULT_SX = {
   flexDirection: "column",
 };
 
-function Board({ sx, pins, children }: BoardProps) {
+function Board({ sx, pins, title, children }: BoardProps) {
   const sxMerged = mergeSx(DEFAULT_SX, sx);
   return (
     <>
@@ -27,7 +29,15 @@ function Board({ sx, pins, children }: BoardProps) {
             <Clip sx={{ top: "10px", right: "10px" }} />
           </Stack>
         )}
-        <Box>{children}</Box>
+        <Box
+          sx={{
+            margin: "36px 64px",
+            height: "100%",
+          }}
+        >
+          {title && <Title title={title} />}
+          <Box>{children}</Box>
+        </Box>
         {pins === "square" && (
           <Stack direction="row" justifyContent="space-between">
             <Clip sx={{ bottom: "10px", left: "10px" }} />
